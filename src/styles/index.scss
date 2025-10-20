@@ -1,0 +1,24 @@
+/* src/styles/index.scss */
+@use "sass:map";
+
+@import "./variables";
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fdfdfd;
+  color: $secondary;
+  margin: 0;
+  padding: 0;
+}
+
+header,
+footer {
+  background: $primary;
+  color: #fff;
+  padding: 1rem 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
