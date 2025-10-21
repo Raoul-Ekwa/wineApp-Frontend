@@ -1,0 +1,51 @@
+/* src/styles/home.scss */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(250px, 1fr)
+  ); // ✅ rend la grille plus fluide
+  gap: 1.5rem;
+  margin-top: 1rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+  align-items: stretch; // ✅ force toutes les cartes à avoir la même hauteur
+}
+
+/* Plus besoin de media queries si tu utilises auto-fit + minmax
+   MAIS si tu préfères garder le contrôle manuel, remets les media queries ci-dessous */
+
+/*
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+*/
+
+.home {
+  padding: 2rem 1rem;
+
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #8b0000;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+}

@@ -1,23 +1,44 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# dependencies (dépendances Node.js, à ne pas versionner car elles peuvent être recréées)
+node_modules
+/.pnp           # Plug'n'Play, utilisé par certains gestionnaires de paquets
+.pnp.js         # Fichier de configuration Plug'n'Play
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# testing (dossier contenant les rapports de tests, inutile à versionner)
+coverage
 
-# testing
-/coverage
+# production (dossiers de build générés automatiquement)
+build
+dist            # certains projets utilisent dist comme dossier de build
 
-# production
-/build
+# misc (fichiers divers à ignorer)
 
-# misc
-.DS_Store
-.env.local
+.DS_Store       # fichier macOS caché, inutile dans le repo
+Thumbs.db       # fichier Windows caché pour les vignettes d’images
+
+# dotenv files (fichiers d’environnement contenant des variables sensibles)
+.env            # fichier principal contenant clés et configs locales
+.env.local      # variantes locales spécifiques au développeur
 .env.development.local
 .env.test.local
 .env.production.local
 
+# logs (fichiers de logs générés lors des erreurs ou debug)
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*  # logs générés par pnpm (autre gestionnaire de paquets)
+
+# IDEs and editors (dossiers et fichiers spécifiques aux éditeurs, inutiles dans le repo)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# cache and build tools (dossiers temporaires ou cache créés par certains outils)
+.cache/
+.next/          # cache et build de Next.js (framework React)
+out/            # dossier de sortie statique généré parfois
+
+# Miscellaneous (autres fichiers de logs, souvent inutiles dans le dépôt)
+*.log
+
