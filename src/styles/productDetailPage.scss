@@ -1,0 +1,69 @@
+@import "../styles/variables.scss"; // ou tes couleurs / radius / etc.
+
+.product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+
+  &__image {
+    flex: 1 1 300px;
+    img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: $radius;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    &__description {
+      font-size: 1rem;
+      color: $secondary;
+    }
+
+    &__price {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: $primary;
+    }
+
+    &__stock {
+      font-size: 1rem;
+      color: $gray;
+    }
+
+    &__button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: $radius;
+      background-color: $primary;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover:not(:disabled) {
+        background-color: darken($primary, 10%);
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

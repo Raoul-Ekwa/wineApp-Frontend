@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { authApi } from "../api/authApi";
+import "../styles/LoginPage.scss";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -18,22 +19,26 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Connexion</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Mot de passe"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Se connecter</button>
-      </form>
-      {error && <p className="error">{error}</p>}
+    <div className="auth-page">
+      <div className="auth-box">
+        <h2>Connexion</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Mot de passe"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Se connecter</button>
+          {error && <p className="error-msg">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 }
