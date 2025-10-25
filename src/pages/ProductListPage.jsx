@@ -5,9 +5,9 @@ import "../styles/productListPage.scss";
 
 const PRICE_FILTERS = [
   { label: "Tous", value: "all" },
-  { label: "< 15€", value: "under15" },
-  { label: "15€ - 25€", value: "15to25" },
-  { label: "> 25€", value: "over25" },
+  { label: "< 15 FCFA", value: "under15" },
+  { label: "15 FCFA - 25 FCFA", value: "15to25" },
+  { label: "> 25 FCFA", value: "over25" },
 ];
 
 const PRODUCTS_PER_PAGE = 6;

@@ -1,6 +1,6 @@
 // src/components/CartItem.jsx
 import React from "react";
-import "./CartItem.scss"; // à créer si besoin
+import "./CartItem.scss";
 
 const CartItem = ({ item, onRemove }) => {
   return (

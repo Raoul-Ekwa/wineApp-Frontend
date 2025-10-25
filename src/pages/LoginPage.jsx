@@ -1,20 +1,29 @@
 import { useState } from "react";
 import { authApi } from "../api/authApi";
 import "../styles/LoginPage.scss";
+import { Link } from "react-router-dom"; // ← pour les liens internes
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({ telephone: "", password: "" });
   const [error, setError] = useState("");
+
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!form.telephone || !form.password) {
+      return setError("Veuillez remplir tous les champs !");
+    }
+
     try {
-      const res = await authApi.login({ email, password });
-      localStorage.setItem("token", res.data.token);
+      const response = await authApi.login(form);
+      localStorage.setItem("token", response.data.token);
       window.location.href = "/";
-    } catch {
-      setError("Email ou mot de passe incorrect");
+    } catch (err) {
+      setError(err.response?.data?.message || "Erreur lors de la connexion");
     }
   };
 
@@ -24,20 +33,24 @@ export default function LoginPage() {
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            name="telephone"
+            placeholder="Téléphone"
+            value={form.telephone}
+            onChange={handleChange}
           />
           <input
+            name="password"
             type="password"
             placeholder="Mot de passe"
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            value={form.password}
+            onChange={handleChange}
           />
           <button type="submit">Se connecter</button>
-          {error && <p className="error-msg">{error}</p>}
+          {error && <div className="error-msg">{error}</div>}
         </form>
+        <div className="forgot-password">
+          <Link to="/ForgotPassword">Mot de passe oublié ?</Link>
+        </div>
       </div>
     </div>
   );
