@@ -1,15 +1,16 @@
 import Router from "./router.jsx";
 import { AuthProvider } from "./context/AuthContext";
-import { CartProvider } from "./context/CartContext";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import "./styles/index.scss";
 
 function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
+    <Provider store={store}>
+      <AuthProvider>
         <Router />
-      </CartProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </Provider>
   );
 }
 

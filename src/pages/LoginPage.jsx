@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { authApi } from "../api/authApi";
 import "../styles/LoginPage.scss";
-import { Link } from "react-router-dom"; // ← pour les liens internes
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
-  const [form, setForm] = useState({ telephone: "", password: "" });
+  const [form, setForm] = useState({ login: "", password: "" }); // login = email ou téléphone
   const [error, setError] = useState("");
 
   const handleChange = (e) =>
@@ -14,14 +14,14 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
 
-    if (!form.telephone || !form.password) {
+    if (!form.login || !form.password) {
       return setError("Veuillez remplir tous les champs !");
     }
 
     try {
-      const response = await authApi.login(form);
+      const response = await authApi.login(form); // envoi { login, password }
       localStorage.setItem("token", response.data.token);
-      window.location.href = "/";
+      window.location.href = "/"; // redirection vers la page d'accueil
     } catch (err) {
       setError(err.response?.data?.message || "Erreur lors de la connexion");
     }
@@ -33,9 +33,9 @@ export default function LoginPage() {
         <h2>Connexion</h2>
         <form onSubmit={handleSubmit}>
           <input
-            name="telephone"
-            placeholder="Téléphone"
-            value={form.telephone}
+            name="login"
+            placeholder="Email ou Téléphone"
+            value={form.login}
             onChange={handleChange}
           />
           <input
@@ -48,8 +48,16 @@ export default function LoginPage() {
           <button type="submit">Se connecter</button>
           {error && <div className="error-msg">{error}</div>}
         </form>
+
         <div className="forgot-password">
           <Link to="/ForgotPassword">Mot de passe oublié ?</Link>
+        </div>
+
+        {/* Nouveau lien vers la page d'inscription */}
+        <div className="auth-footer">
+          <p className="register">
+            Pas de compte ? <Link to="/Register">Créer un compte</Link>
+          </p>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ export const authApi = {
   requestPasswordReset: (data) =>
     axiosClient.post("/auth/password-reset", data),
 
-  // Réinitialisation du mot de passe avec token
-  resetPassword: (token, newPassword) =>
-    axiosClient.post(`/auth/password-reset/${token}`, { newPassword }),
+  // Réinitialisation du mot de passe avec token (modifié)
+  resetPassword: (token, data) =>
+    axiosClient.post(`/auth/password-reset/${token}`, data),
 };

@@ -81,3 +81,23 @@
     }
   }
 }
+
+.auth-footer {
+  margin-top: 20px;
+  text-align: center;
+
+  .register {
+    font-size: 14px;
+
+    a {
+      color: #8b4513; // marron
+      font-weight: 700;
+      text-decoration: none;
+
+      &:hover {
+        color: #a0522d; // marron plus clair au hover
+        text-decoration: underline;
+      }
+    }
+  }
+}
