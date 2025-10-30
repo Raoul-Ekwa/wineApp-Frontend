@@ -43,7 +43,7 @@ export default function ProductDetailPage() {
       await dispatch(
         addToCartAsync({ productId: product.id, quantity: 1 })
       ).unwrap();
-      dispatch(fetchCartAsync()); // ⚡ recharge le panier complet avec Product
+      dispatch(fetchCartAsync()); //  recharge le panier complet avec Product
 
       dispatch(fetchCartAsync());
       setToast(true);
@@ -57,7 +57,7 @@ export default function ProductDetailPage() {
 
   if (status === "loading") return <div className="loader">Chargement...</div>;
   if (status === "error" || !product)
-    return <p className="error-text">❌ Produit introuvable</p>;
+    return <p className="error-text"> Produit introuvable</p>;
 
   const quantityInCart =
     cart.find((item) => item.id === product.id)?.quantity || 0;
@@ -106,7 +106,7 @@ export default function ProductDetailPage() {
         </div>
       </div>
 
-      {toast && <div className="toast">✅ Produit ajouté au panier !</div>}
+      {toast && <div className="toast"> Produit ajouté au panier !</div>}
     </div>
   );
 }

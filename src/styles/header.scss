@@ -1,4 +1,4 @@
-@import "./variables"; // si tu as des variables
+@import "./variables";
 
 .header {
   position: sticky;
@@ -24,7 +24,7 @@
     text-decoration: none;
 
     img {
-      height: 100px; // ← augmente ici à ta convenance
+      height: 100px;
       max-height: 100px;
       width: auto;
       object-fit: contain;

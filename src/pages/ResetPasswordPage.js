@@ -16,7 +16,7 @@ export default function ResetPasswordPage() {
     }
 
     try {
-      // ⚠️ Le token envoyé doit être complet
+      //  Le token envoyé doit être complet
       const res = await authApi.resetPassword(token, { newPassword });
 
       setMessage(res.data.message || "Mot de passe réinitialisé avec succès !");
