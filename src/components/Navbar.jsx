@@ -1,10 +1,17 @@
 // src/components/Navbar.jsx
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/images/logo.jpg"; // Garde le logo si tu veux l'afficher
-import "../styles/Navbar.scss"; // À créer
+import { useSelector } from "react-redux";
+import logo from "../assets/images/logo.jpg";
+import "../styles/Navbar.scss";
 
-const Navbar = ({ cartCount = 0, user = null }) => {
+const Navbar = () => {
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+  const token = localStorage.getItem("token");
+  const userLogged = !!token;
+
   return (
     <nav className="navbar">
       <div className="navbar__container">
@@ -21,8 +28,7 @@ const Navbar = ({ cartCount = 0, user = null }) => {
               <span className="navbar__badge">{cartCount}</span>
             )}
           </Link>
-
-          {user ? (
+          {userLogged ? (
             <Link to="/profile">Profil</Link>
           ) : (
             <Link to="/login">Se connecter</Link>

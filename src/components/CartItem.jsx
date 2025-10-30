@@ -1,19 +1,33 @@
-// src/components/CartItem.jsx
 import React from "react";
-import "./CartItem.scss";
+import "../styles/CartItem.scss";
 
-const CartItem = ({ item, onRemove }) => {
+export default function CartItem({
+  item,
+  quantity,
+  onRemove,
+  onIncrease,
+  onDecrease,
+}) {
   return (
     <div className="cart-item">
-      <img src={item.image} alt={item.name} className="cart-item__image" />
+      <img src={item.image} alt={item.name} />
+
       <div className="cart-item__info">
         <h4>{item.name}</h4>
-        <p>Prix: ${item.price}</p>
-        <p>Quantité: {item.quantity}</p>
-        <button onClick={() => onRemove(item.id)}>Supprimer</button>
+        <p>Prix: {item.price.toFixed(2)} €</p>
+
+        <div className="quantity">
+          <button onClick={onDecrease} disabled={quantity <= 1}>
+            −
+          </button>
+          <span>{quantity}</span>
+          <button onClick={onIncrease}>+</button>
+        </div>
+
+        <button className="remove-btn" onClick={onRemove}>
+          Supprimer
+        </button>
       </div>
     </div>
   );
-};
-
-export default CartItem;
+}

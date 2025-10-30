@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux"; // 🔹 importer useSelector
 import logo from "../assets/images/logo.svg";
 import "../styles/header.scss";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const cartCount = 3; // <-- à remplacer plus tard par un vrai state/cart context
+
+  // 🔹 Récupérer le panier depuis Redux
+  const cartItems = useSelector((state) => state.cart.items);
+  const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
@@ -38,6 +42,8 @@ export default function Header() {
           <Link to="/login" onClick={closeMenu}>
             Connexion
           </Link>
+
+          {/* 🔹 Panier avec badge dynamique */}
           <Link to="/cart" onClick={closeMenu} className="cart-link">
             🛒
             {cartCount > 0 && <span className="cart-count">{cartCount}</span>}

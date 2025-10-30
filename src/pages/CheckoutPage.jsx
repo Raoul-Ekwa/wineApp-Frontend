@@ -1,59 +1,58 @@
-// src/pages/CheckoutPage.jsx
-import React, { useContext, useState } from "react";
-import { CartContext } from "../context/CartContext";
-import { createOrder } from "../api/orderApi";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/CheckoutPage.scss";
 
-const CheckoutPage = () => {
-  const { cartItems, clearCart } = useContext(CartContext);
-  const [loading, setLoading] = useState(false);
+export default function CheckoutPage() {
+  const [paymentMethod, setPaymentMethod] = useState("");
   const navigate = useNavigate();
 
-  const handleCheckout = async () => {
-    setLoading(true);
-    try {
-      const orderData = {
-        items: cartItems.map((i) => ({
-          productId: i.id,
-          quantity: i.quantity,
-        })),
-        total: cartItems.reduce((acc, i) => acc + i.price * i.quantity, 0),
-      };
-      const response = await createOrder(orderData);
-      clearCart();
-      navigate(`/order-success/${response.id}`);
-    } catch (err) {
-      console.error("Erreur lors du paiement:", err);
-    } finally {
-      setLoading(false);
+  const handlePaymentSelection = (method) => {
+    setPaymentMethod(method);
+  };
+
+  const handleConfirmPayment = () => {
+    if (!paymentMethod) {
+      alert("Veuillez choisir un mode de paiement !");
+      return;
+    }
+
+    // Redirection vers la page correspondante selon le mode choisi
+    if (paymentMethod === "momo") {
+      navigate("/payment-momo");
+    } else if (paymentMethod === "card") {
+      navigate("/payment-card");
     }
   };
 
   return (
     <div className="checkout-page">
-      <h1>Checkout</h1>
-      {cartItems.length === 0 ? (
-        <p>Votre panier est vide.</p>
-      ) : (
-        <>
-          <ul>
-            {cartItems.map((item) => (
-              <li key={item.id}>
-                {item.name} - {item.quantity} x ${item.price}
-              </li>
-            ))}
-          </ul>
-          <p>
-            Total: $
-            {cartItems.reduce((acc, i) => acc + i.price * i.quantity, 0)}
-          </p>
-          <button onClick={handleCheckout} disabled={loading}>
-            {loading ? "Paiement en cours..." : "Payer maintenant"}
-          </button>
-        </>
-      )}
+      <h1>Choisissez votre mode de paiement</h1>
+
+      <div className="payment-options">
+        <div
+          className={`payment-card ${
+            paymentMethod === "momo" ? "selected" : ""
+          }`}
+          onClick={() => handlePaymentSelection("momo")}
+        >
+          <h3>Mobile Money</h3>
+          <p>Payer via Orange Money, MTN Mobile Money, etc.</p>
+        </div>
+
+        <div
+          className={`payment-card ${
+            paymentMethod === "card" ? "selected" : ""
+          }`}
+          onClick={() => handlePaymentSelection("card")}
+        >
+          <h3>Carte Bancaire</h3>
+          <p>Payer avec votre carte Visa ou Mastercard.</p>
+        </div>
+      </div>
+
+      <button className="btn-confirm" onClick={handleConfirmPayment}>
+        Confirmer le paiement
+      </button>
     </div>
   );
-};
-
-export default CheckoutPage;
+}

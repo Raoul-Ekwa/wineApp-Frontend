@@ -22,7 +22,7 @@ export default function ProductCard({ product }) {
       />
       <div className="product-card__content">
         <h2 className="product-card__title">{product.name}</h2>
-        <p className="product-card__price">{product.price} FCFA</p>
+        <p className="product-card__price">{product.price} €</p>
       </div>
     </div>
   );
